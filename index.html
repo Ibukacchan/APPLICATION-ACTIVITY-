@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#100d12"><meta name="description" content="The Rebellion's Final Mission — a cinematic classroom activity about equality and inclusion.">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png">
+<title>The Arena of Equality | Final Mission</title>
+<style>
+:root{--bg:#100d12;--panel:#1b1720;--gold:#e8bd65;--muted:#c6b9a1;--red:#a62d35;--line:#51402c;--teal:#58b8ad}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#533022 0,#21151c 36%,var(--bg) 75%);color:#f8f1e5;font:16px/1.5 Georgia,serif;min-height:100vh}
+header{padding:24px 16px 18px;text-align:center;border-bottom:1px solid #6d512d;background:linear-gradient(180deg,#170f13cc,#100d12aa)}
+.eyebrow{letter-spacing:.22em;color:var(--gold);font:700 11px Arial;text-transform:uppercase}
+h1{font-size:clamp(30px,7vw,58px);line-height:1.02;margin:10px auto;color:var(--gold);text-shadow:0 2px 0 #6b3d17,0 0 22px #d99c4266;max-width:900px}
+.subtitle{color:#f5dcb0;letter-spacing:.14em;font:700 12px Arial}
+.emblem{font-size:42px;color:var(--gold);filter:drop-shadow(0 0 12px #d28d42);margin:4px}
+nav{display:flex;gap:8px;overflow:auto;padding:12px;position:sticky;top:0;background:#100d12ed;z-index:5;border-bottom:1px solid var(--line)}
+nav button{white-space:nowrap}
+button,.btn{border:1px solid #987343;background:linear-gradient(135deg,#3a2521,#211821);color:#ffe8b6;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
+button:hover,.btn:hover{filter:brightness(1.2)}button.primary{background:linear-gradient(135deg,#9c3034,#5b1d2b);border-color:#e1a65a}button:disabled{opacity:.45}
+main{max-width:1050px;margin:auto;padding:18px 14px 60px}.view{display:none}.view.active{display:block}
+.panel{background:linear-gradient(145deg,#241c24ee,#17131bee);border:1px solid var(--line);border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 12px 30px #0006}
+h2,h3{color:var(--gold);margin:0 0 10px}h2{font-size:26px}h3{font-size:19px}
+.small{font:13px/1.5 Arial,sans-serif;color:var(--muted)}.gold{color:var(--gold)}.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.district{position:relative;overflow:hidden;min-height:160px;cursor:pointer;transition:.2s}.district:hover{transform:translateY(-3px);border-color:var(--gold)}
+.district .number{font:700 11px Arial;letter-spacing:.2em;color:var(--muted)}.district h3{font-size:22px}.district .crest{font-size:32px;float:right}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:4px 9px;font:11px Arial;color:var(--gold);margin:3px}
+ul.names{columns:2;padding-left:20px;margin:8px 0}li{padding:2px 0}
+input,textarea,select{width:100%;background:#100e13;color:#fff2d8;border:1px solid #665033;border-radius:9px;padding:10px;font:15px Arial;margin:5px 0 12px}
+textarea{min-height:90px;resize:vertical}label{font:12px Arial;color:var(--muted);display:block}
+.timer{font:700 clamp(48px,12vw,84px)/1 Arial;color:var(--gold);text-align:center;text-shadow:0 0 20px #e8bd6566;margin:15px 0}
+.progress{height:10px;background:#09080b;border-radius:99px;overflow:hidden;border:1px solid #5a462b}.progress>div{height:100%;background:linear-gradient(90deg,#a52e37,#e8bd65);width:100%;transition:width .3s}
+table{width:100%;border-collapse:collapse;font:13px Arial}th,td{padding:9px 7px;border-bottom:1px solid #493b2c;text-align:left;vertical-align:top}th{color:var(--gold)}
+.rubricwrap{overflow-x:auto}.rubric{min-width:760px}
+.scoregrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.scoregrid input{padding:8px;text-align:center}
+.notice{border-left:3px solid var(--gold);padding:10px 13px;background:#33251d77;color:#f1dfc0}
+footer{text-align:center;color:#9c8d79;font:11px Arial;padding:22px}
+@media(max-width:540px){ul.names{columns:1}.panel{padding:14px}.scoregrid{grid-template-columns:repeat(2,1fr)}}
+</style></head>
+<body>
+<header><div class="eyebrow">A GEND 101 Classroom Challenge</div><div class="emblem">✦ 🕊 ✦</div><h1>THE ARENA OF EQUALITY</h1><div class="subtitle">THE REBELLION'S FINAL MISSION</div><p class="small">BREAK STEREOTYPES · RESPECT DIFFERENCES · BUILD EQUALITY</p></header>
+<nav>
+<button onclick="show('home')">Arena</button><button onclick="show('mission')">Mission Board</button><button onclick="show('timer')">Countdown</button><button onclick="show('rubric')">Rubric</button><button onclick="show('control')">Gamemaker's Control</button>
+</nav>
+<main>
+<section id="home" class="view active">
+<div class="panel"><h2>Tributes, your final mission awaits.</h2><p>Choose your district to reveal your members, mission, instructions, and expected output. Work together, think critically, and stand for equality.</p><div class="notice"><b>10 MINUTES. FIVE DISTRICTS. ONE REBELLION.</b><br><span class="small">Each district receives a different challenge. Every voice matters.</span></div></div>
+<div id="districtCards" class="grid"></div>
+</section>
+<section id="mission" class="view"><div id="missionContent" class="panel"><h2>Select your district</h2><p>Choose a district from the Arena page.</p></div></section>
+<section id="timer" class="view"><div class="panel"><h2>THE GAMEMAKER'S COUNTDOWN</h2><p class="small">The full activity lasts 10 minutes. The timer can be controlled by the teacher.</p><div class="timer" id="clock">10:00</div><div class="progress"><div id="bar"></div></div><div class="grid" style="margin-top:16px"><button class="primary" onclick="startTimer()">▶ Start</button><button onclick="pauseTimer()">Ⅱ Pause</button><button onclick="resetTimer()">↺ Reset</button></div><p id="timerMessage" class="notice">The Arena is waiting. Press Start when all districts are ready.</p></div></section>
+<section id="rubric" class="view"><div class="panel"><h2>ANALYTICAL ASSESSMENT RUBRIC</h2><p class="small">Score each criterion from 1 to 4. Maximum: 20 points per district.</p><div class="rubricwrap"><table class="rubric"><thead><tr><th>Criteria</th><th>4 · Excellent</th><th>3 · Very Good</th><th>2 · Developing</th><th>1 · Beginning</th></tr></thead><tbody>
+<tr><th>Understanding</th><td>Accurate, thorough understanding of heteronormativity and equality.</td><td>Clear understanding with minor gaps.</td><td>Partial understanding; some ideas unclear.</td><td>Limited or inaccurate understanding.</td></tr>
+<tr><th>Application</th><td>Applies concepts effectively with relevant examples or solutions.</td><td>Applies concepts appropriately.</td><td>Limited application; examples need improvement.</td><td>Little or no application.</td></tr>
+<tr><th>Critical Thinking</th><td>Thoughtful analysis and clear reasoning.</td><td>Logical ideas with adequate explanation.</td><td>Basic ideas with limited explanation.</td><td>Unclear ideas with little explanation.</td></tr>
+<tr><th>Creativity & Communication</th><td>Original, engaging, organized, clearly communicated output.</td><td>Organized output communicated clearly.</td><td>Some creativity; clarity or organization needs work.</td><td>Disorganized and difficult to understand.</td></tr>
+<tr><th>Collaboration</th><td>All members contribute actively and respectfully.</td><td>Most members contribute respectfully.</td><td>Some members participate; contributions uneven.</td><td>Limited cooperation and participation.</td></tr>
+</tbody></table></div><p class="small">Performance bands: 18–20 Excellent · 15–17 Very Satisfactory · 12–14 Satisfactory · 9–11 Developing · 5–8 Beginning.</p><div class="notice">Assess the quality of each district's work against the same criteria. Do not penalize personal identity, beliefs, or a learner's choice not to share personal experiences.</div></div></section>
+<section id="control" class="view"><div class="panel"><h2>GAMEMAKER'S CONTROL ROOM</h2><p class="small">Scores are saved in this browser. Enter a score from 1–4 for each criterion. Total is calculated automatically.</p><label>Choose district</label><select id="scoreDistrict" onchange="loadScoreForm()"></select><div id="scoreForm"></div><button class="primary" onclick="saveScore()">Save district score</button><button onclick="exportCSV()">Export results CSV</button><button onclick="clearScores()">Clear all scores</button></div><div class="panel"><h3>District scoreboard</h3><div id="scoreboard"></div></div></section>
+</main><footer>THE ARENA OF EQUALITY · EVERY VOICE MATTERS. EVERY ACTION COUNTS.</footer>
+<script>
+const districts=[
+{name:"The Observers",title:"Spot the Stereotype",motto:"See. Question. Create Change.",crest:"👁️",color:"#d8a94e",members:["Yangan","Pagaran","Salcedo","Fortallio","Abuzo","Ledesma","Arias","Abrio"],task:"Identify three examples of heteronormativity in everyday life. Write an inclusive alternative for each.",output:"Three examples of stereotypes and their inclusive alternatives.",steps:["Discuss everyday expectations about gender, sexuality, or families.","List three examples of heteronormativity.","Write a fair and inclusive alternative for each example."]},
+{name:"The Truth Seekers",title:"Break the Bias",motto:"Uncover. Analyze. Expose.",crest:"🛡️",color:"#c7cbd1",members:["Intia","Amora","Cabalang","Labial, L.","Gulapo, C.","Naluan","Alaba","Miculob"],task:"Analyze this statement: “Boys should never cry because crying makes them weak.” Explain why it is a stereotype and how it can affect individuals.",output:"A brief explanation identifying the stereotype and its possible effects.",steps:["Read the statement carefully.","Identify the gender stereotype it expresses.","Explain why it is unfair and describe possible effects."]},
+{name:"The Voices",title:"Rewrite the Message",motto:"Listen. Understand. Amplify.",crest:"📣",color:"#4da6dc",members:["Morano","Barsobia","Balumpo","Senogbohan","Bangot","Japona","Econar"],task:"Transform the phrase “Iyakin, parang bakla” into an empowering and respectful message.",output:"A rewritten statement that promotes acceptance and respect.",steps:["Discuss why the phrase can be hurtful.","Rewrite it without insulting or stereotyping anyone.","Prepare a short explanation of your new message."]},
+{name:"The Advocates",title:"Raise Your Voice",motto:"Inform. Inspire. Take Action.",crest:"🌊",color:"#54b9a6",members:["Paca","Gadrinab","Obradas","Acac","Susi","Teofilo","Samon"],task:"Create an equality slogan and propose one concrete action students can take to prevent discrimination.",output:"One advocacy slogan and one proposed action.",steps:["Create a short, memorable equality slogan.","Choose one realistic action students can take.","Explain how the action can help prevent discrimination."]},
+{name:"The Alliance",title:"Build a Better Society",motto:"Unite. Collaborate. Build Tomorrow.",crest:"⚡",color:"#a78be0",members:["Buhawe","Gamutan","Gales","Bunglay","Labial, S.","Risare","Tanghian"],task:"Create three classroom rules that promote equality, acceptance, and respect for everyone.",output:"Three principles for an inclusive classroom.",steps:["Discuss what makes a classroom safe and inclusive.","Write three clear and practical classroom rules.","Make sure each rule respects everyone's dignity."]}
+];
+let selected=0,remaining=600,interval=null;
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$(id).classList.add('active');if(id==='control')renderBoard();window.scrollTo(0,0)}
+function selectDistrict(i){selected=i;renderMission();show('mission')}
+function renderCards(){$('districtCards').innerHTML=districts.map((d,i)=>`<article class="panel district" onclick="selectDistrict(${i})" style="border-top:4px solid ${d.color}"><span class="crest">${d.crest}</span><div class="number">DISTRICT 0${i+1}</div><h3>${d.name}</h3><b>${d.title}</b><p class="small">${d.motto}</p><span class="tag">${d.members.length} members</span></article>`).join('')}
+function renderMission(){let d=districts[selected];$('missionContent').innerHTML=`<span class="tag">DISTRICT 0${selected+1}</span><h2>${d.crest} ${d.name}</h2><p class="gold"><b>${d.motto}</b></p><h3>YOUR MISSION: ${d.title}</h3><p>${d.task}</p><h3>Mission instructions</h3><ol>${d.steps.map(s=>`<li>${s}</li>`).join('')}</ol><h3>Expected output</h3><p class="notice">${d.output}</p><h3>District members</h3><ul class="names">${d.members.map(n=>`<li>${n}</li>`).join('')}</ul><p class="small">Work together. Choose a spokesperson. Present your output in 30 seconds.</p><button class="primary" onclick="show('timer')">Go to countdown →</button>`}
+function fmt(t){return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}
+function paintTimer(){$('clock').textContent=fmt(remaining);$('bar').style.width=(remaining/600*100)+'%'}
+function startTimer(){if(interval)return; if(remaining<=0)remaining=600; $('timerMessage').textContent='The mission is underway. Make every second count!';interval=setInterval(()=>{remaining--;paintTimer();if(remaining<=0){pauseTimer();$('timerMessage').textContent='TIME IS UP! Districts, prepare to present your missions.';try{if(navigator.vibrate)navigator.vibrate([300,150,300])}catch(e){}}},1000)}
+function pauseTimer(){clearInterval(interval);interval=null;$('timerMessage').textContent='Timer paused.'}
+function resetTimer(){pauseTimer();remaining=600;paintTimer();$('timerMessage').textContent='Timer reset. Ready for the mission.'}
+const keys=['Understanding','Application','Critical Thinking','Creativity & Communication','Collaboration'];
+function getScores(){try{return JSON.parse(localStorage.getItem('arenaScores')||'{}')}catch(e){return {}}}
+function loadScoreForm(){let i=+$('scoreDistrict').value,s=getScores()[i]||[0,0,0,0,0];$('scoreForm').innerHTML=keys.map((k,j)=>`<label>${k} (1–4)</label><select id="s${j}">${[0,1,2,3,4].map(v=>`<option value="${v}" ${s[j]===v?'selected':''}>${v===0?'Not scored':v}</option>`).join('')}</select>`).join('')+'<p class="small">Enter 1–4 for each criterion. All five criteria are required for a final score.</p>'}
+function saveScore(){let i=+$('scoreDistrict').value,a=keys.map((k,j)=>+$('s'+j).value);if(a.some(v=>v<1||v>4)){alert('Please score all five criteria from 1 to 4.');return}let s=getScores();s[i]=a;localStorage.setItem('arenaScores',JSON.stringify(s));renderBoard();alert('District score saved on this device.')}
+function renderBoard(){let s=getScores();$('scoreboard').innerHTML='<table><tr><th>District</th><th>Total / 20</th><th>Performance</th></tr>'+districts.map((d,i)=>{let a=s[i],t=a?a.reduce((x,y)=>x+y,0):'—';let p=t==='—'?'Not scored':t>=18?'Excellent':t>=15?'Very Satisfactory':t>=12?'Satisfactory':t>=9?'Developing':'Beginning';return `<tr><td>${d.name}</td><td>${t}</td><td>${p}</td></tr>`}).join('')+'</table>'}
+function exportCSV(){let s=getScores(),rows=[['District','Understanding','Application','Critical Thinking','Creativity & Communication','Collaboration','Total']];districts.forEach((d,i)=>{let a=s[i]||['','','','',''];rows.push([d.name,...a,a.every(v=>v!=='')?a.reduce((x,y)=>x+y,0):''])});let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='arena-district-results.csv';a.click();URL.revokeObjectURL(a.href)}
+function clearScores(){if(confirm('Clear all saved district scores on this device?')){localStorage.removeItem('arenaScores');loadScoreForm();renderBoard()}}
+$('scoreDistrict').innerHTML=districts.map((d,i)=>`<option value="${i}">District ${i+1} — ${d.name}</option>`).join('');
+renderCards();renderMission();loadScoreForm();renderBoard();paintTimer();
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
